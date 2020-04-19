@@ -1,8 +1,8 @@
-const { sendToSlack } = require('../_helpers/slack');
+const got = require('got');
 
-module.exports = (req, res) => {
+const { prepareSlackMsg } = require('../_helpers/slack');
 
-  res.end();
+module.exports = async (req, res) => {
 
   const { body } = req;
 
@@ -11,12 +11,18 @@ module.exports = (req, res) => {
     return res.end();
   }
 
-  body.forEach((log) => {
-    const logType = log.data && log.data.type;
-    if ('f' === logType[0] || logType.indexOf('fail') || logType.indexOf('limit')) {
-      sendToSlack(log.data);
-    }
-  });
+  const failedLogs = body
+    .filter((log) => 'f' === log.data.type[0] || /fail|limit/.test(log.data.type))
+    .map((log) => prepareSlackMsg(log.data));
 
-  return res.end();
+  const reqUrl = 'https://hooks.slack.com/services/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';
+  const reqOpts = {
+    method: 'POST',
+    json: {
+      attachments: failedLogs
+    }
+  }
+
+  const response = await got(reqUrl, reqOpts);
+  res.send(response.body);
 }
