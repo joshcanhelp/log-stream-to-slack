@@ -4,10 +4,10 @@ module.exports.prepareSlackMsg = (logData) => {
   return {
     fallback: `Auth0 error code "${logData.type}": ${errorDesc}`,
     color: '#ff0000',
-    pretext: '🚨 Failure on Auth0 🚨',
+    pretext: '🚨 Auth0 log alert 🚨',
     title: `Log entry with error code "${logData.type}"`,
     title_link: `https://manage.auth0.com/#/logs/${logData.log_id}`,
-    text: `${errorDesc} at ${logData.date || Date.now()}`,
+    text: errorDesc,
     fields: [
         {
             title: 'Client Name',

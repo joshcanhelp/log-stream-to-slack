@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     .filter((log) => 'f' === log.data.type[0] || /fail|limit/.test(log.data.type))
     .map((log) => prepareSlackMsg(log.data));
 
-  const reqUrl = 'https://hooks.slack.com/services/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';
+  const reqUrl = process.env.SLACK_HOOK_URL;
   const reqOpts = {
     method: 'POST',
     json: {
