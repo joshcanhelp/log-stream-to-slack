@@ -1,0 +1,24 @@
+{
+  "name": "log-stream-to-slack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "got": "^10.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ObstacleParty/log-stream-to-slack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ObstacleParty/log-stream-to-slack/issues"
+  },
+  "homepage": "https://github.com/ObstacleParty/log-stream-to-slack#readme"
+}
