@@ -4,11 +4,16 @@ const { prepareSlackMsg } = require('../_helpers/slack');
 
 module.exports = async (req, res) => {
 
-  const { body } = req;
+  const { body, headers } = req;
 
-  if (!body || !Array.isArray(body)) {
+  if (!body || !Array.isArray(body) || !headers.authorization) {
     res.status(400);
-    return res.end();
+    return res.end('BAD REQUEST');
+  }
+
+  if (headers.authorization !== process.env.SLACK_FUNCTION_TOKEN) {
+    res.status(401);
+    return res.end('NOT AUTHORIZED');
   }
 
   const failedLogs = body
