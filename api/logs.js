@@ -20,6 +20,11 @@ module.exports = async (req, res) => {
     .filter((log) => 'f' === log.data.type[0] || /fail|limit/.test(log.data.type))
     .map((log) => prepareSlackMsg(log.data));
 
+  if (!failedLogs.length) {
+    res.status(200);
+    return res.end();
+  }
+
   const reqUrl = process.env.SLACK_HOOK_URL;
   const reqOpts = {
     method: 'POST',
@@ -28,6 +33,7 @@ module.exports = async (req, res) => {
     }
   }
 
-  const response = await got(reqUrl, reqOpts);
-  res.send(response.body);
+  const slackResponse = await got(reqUrl, reqOpts);
+  res.status(slackResponse.statusCode);
+  res.end(slackResponse.body);
 }
