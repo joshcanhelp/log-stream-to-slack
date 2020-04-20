@@ -4,10 +4,11 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1",
     "got": "^10.7.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^25.4.0"
+  },
   "scripts": {
     "start": "nodemon app.js"
   },
