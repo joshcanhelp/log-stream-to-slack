@@ -11,6 +11,9 @@ module.exports = async (req, res) => {
     return res.end('BAD REQUEST');
   }
 
+  console.log(headers);
+  console.log(process.env);
+
   if (headers.authorization !== process.env.SLACK_FUNCTION_TOKEN) {
     res.status(401);
     return res.end('NOT AUTHORIZED');
