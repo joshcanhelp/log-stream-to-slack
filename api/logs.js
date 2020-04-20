@@ -1,12 +1,12 @@
 const got = require('got');
 
-const { prepareSlackMsg } = require('../_helpers/slack');
+const { prepareSlackMsg } = require('../lib/utils');
 
 module.exports = async (req, res) => {
 
   const { body, headers } = req;
 
-  if (!body || !Array.isArray(body) || !headers.authorization) {
+  if (!body || !Array.isArray(body)) {
     res.status(400);
     return res.end('BAD REQUEST');
   }
@@ -16,9 +16,9 @@ module.exports = async (req, res) => {
     return res.end('NOT AUTHORIZED');
   }
 
-  const failedLogs = body
-    .filter((log) => 'f' === log.data.type[0] || /fail|limit/.test(log.data.type))
-    .map((log) => prepareSlackMsg(log.data));
+  const failedLogs = body.filter((log) => {
+    'f' === log.data.type[0] || /fail|limit/.test(log.data.type)
+  });
 
   if (!failedLogs.length) {
     res.status(200);
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
   const reqOpts = {
     method: 'POST',
     json: {
-      attachments: failedLogs
+      attachments: failedLogs.map(prepareSlackMsg)
     }
   }
 
