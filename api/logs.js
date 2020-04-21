@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   }
 
   const failedLogs = body.filter((log) => {
-    'f' === log.data.type[0] || /fail|limit/.test(log.data.type)
+    'f' === log.data.type[0] || /fail|limit/.test(log.data.type);
   });
 
   if (!failedLogs.length) {
@@ -31,9 +31,9 @@ module.exports = async (req, res) => {
     json: {
       attachments: failedLogs.map(prepareSlackMsg)
     }
-  }
+  };
 
   const slackResponse = await got(reqUrl, reqOpts);
   res.status(slackResponse.statusCode);
   res.end(slackResponse.body);
-}
+};
