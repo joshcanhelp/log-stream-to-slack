@@ -8,12 +8,12 @@ module.exports = async (req, res) => {
 
   if (!body || !Array.isArray(body)) {
     res.status(400);
-    return res.end('BAD REQUEST');
+    return res.end();
   }
 
   if (headers.authorization !== process.env.SLACK_FUNCTION_TOKEN) {
     res.status(401);
-    return res.end('NOT AUTHORIZED');
+    return res.end();
   }
 
   const failedLogs = body.filter((log) => {
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
   });
 
   if (!failedLogs.length) {
-    res.status(200);
+    res.status(204);
     return res.end();
   }
 
@@ -35,5 +35,5 @@ module.exports = async (req, res) => {
 
   const slackResponse = await got(reqUrl, reqOpts);
   res.status(slackResponse.statusCode);
-  res.end(slackResponse.body);
+  return res.end(slackResponse.body);
 };
