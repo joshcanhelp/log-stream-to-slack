@@ -13,7 +13,7 @@
     "jest": "^25.4.0"
   },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "test": "jest --coverage",
     "lint": "eslint . --fix",
     "test:watch": "jest --verbose --watch"
