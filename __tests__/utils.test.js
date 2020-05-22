@@ -9,12 +9,14 @@ describe('utils', () => {
     it('should prepare a default message', () => {
       const result = prepareSlackMsg({});
 
+      expect(result).toHaveProperty('pretext');
+      expect(result.pretext).toEqual('*Auth0 log alert*');
       expect(result).toHaveProperty('fallback');
-      expect(result.fallback).toEqual('Auth0 log: No description [undefined]');
+      expect(result.fallback).toEqual('No description [type: undefined]');
       expect(result).toHaveProperty('color');
       expect(result.color).toEqual('#ff0000');
       expect(result).toHaveProperty('title');
-      expect(result.title).toEqual('Auth0 log: No description [undefined]');
+      expect(result.title).toEqual('No description [type: undefined]');
 
       expect(result).not.toHaveProperty('title_link');
       expect(result).not.toHaveProperty('fields');
@@ -25,9 +27,9 @@ describe('utils', () => {
       const result = prepareSlackMsg(log);
 
       expect(result).toHaveProperty('fallback');
-      expect(result.fallback).toEqual(`Auth0 log: No description [${log.data.type}]`);
+      expect(result.fallback).toEqual(`No description [type: ${log.data.type}]`);
       expect(result).toHaveProperty('title');
-      expect(result.title).toEqual(`Auth0 log: No description [${log.data.type}]`);
+      expect(result.title).toEqual(`No description [type: ${log.data.type}]`);
     });
 
     it('should include the log description', () => {
@@ -35,7 +37,7 @@ describe('utils', () => {
       const result = prepareSlackMsg(log);
 
       expect(result).toHaveProperty('fallback');
-      expect(result.fallback).toEqual(`Auth0 log: ${log.data.description} [undefined]`);
+      expect(result.fallback).toEqual(`${log.data.description} [type: undefined]`);
     });
 
     it('should include Client information if a Client ID is present', () => {
@@ -45,7 +47,7 @@ describe('utils', () => {
       expect(result).toHaveProperty('fields');
       expect(result.fields.length).toEqual(1);
       expect(result.fields[0].title).toEqual('Client');
-      expect(result.fields[0].value).toEqual(`None [${log.data.client_id}]`);
+      expect(result.fields[0].value).toEqual(`None\n\`${log.data.client_id}\``);
     });
 
     it('should include a Client Name if Client ID and Name are present', () => {
@@ -53,7 +55,7 @@ describe('utils', () => {
       const result = prepareSlackMsg(log);
 
       expect(result).toHaveProperty('fields');
-      expect(result.fields[0].value).toEqual(`${log.data.client_name} [${log.data.client_id}]`);
+      expect(result.fields[0].value).toEqual(`${log.data.client_name}\n\`${log.data.client_id}\``);
     });
 
     it('should include log to the log entry if an ID is present', () => {
