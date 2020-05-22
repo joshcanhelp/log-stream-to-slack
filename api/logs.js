@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     return res.end();
   }
 
-  if (headers.authorization !== process.env.SLACK_FUNCTION_TOKEN) {
+  if (headers.authorization !== process.env.AUTH0_LOG_STREAM_TOKEN) {
     res.status(401);
     return res.end();
   }
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     return res.end();
   }
 
-  const reqUrl = process.env.SLACK_HOOK_URL;
+  const reqUrl = process.env.SLACK_WEBHOOK_URL;
   const reqOpts = {
     method: 'POST',
     json: {
