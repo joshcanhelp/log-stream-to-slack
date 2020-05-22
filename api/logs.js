@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
     return res.end();
   }
 
+  console.log(body);
+
   const failedLogs = body.filter((log) => {
     'f' === log.data.type[0] || /fail|limit/.test(log.data.type);
   });
