@@ -1,9 +1,8 @@
-const got = require('got');
+const got = require("got");
 
-const { prepareSlackMsg } = require('../lib/utils');
+const { prepareSlackMsg } = require("../lib/utils");
 
 module.exports = async (req, res) => {
-
   const { body, headers } = req;
 
   if (!body || !Array.isArray(body)) {
@@ -17,20 +16,20 @@ module.exports = async (req, res) => {
   }
 
   const failedLogs = body.filter((log) => {
-    return 'f' === log.data.type[0] || /fail|limit/.test(log.data.type);
+    return "f" === log.data.type[0] || /fail|limit/.test(log.data.type);
   });
 
-  if (!failedLogs.length) {
+  if (failedLogs.length === 0) {
     res.status(204);
     return res.end();
   }
 
   const reqUrl = process.env.SLACK_WEBHOOK_URL;
   const reqOpts = {
-    method: 'POST',
+    method: "POST",
     json: {
-      attachments: failedLogs.map(prepareSlackMsg)
-    }
+      attachments: failedLogs.map((log) => prepareSlackMsg(log)),
+    },
   };
 
   const slackResponse = await got(reqUrl, reqOpts);

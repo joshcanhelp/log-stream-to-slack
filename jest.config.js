@@ -1,27 +1,30 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
-
 module.exports = {
-
-  // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
-
-  // A list of reporter names that Jest uses when writing coverage reports.
-  coverageReporters: [
-    'json', 'json-summary', 'text'
+  "testEnvironment": "node",
+  "collectCoverageFrom": [
+    "**/src/**/*.{ts,tsx,js,jsx}",
+    "**/test/**/*.{ts,tsx,js,jsx}"
   ],
-
-  // An array of glob patterns indicating a set of files for which coverage information should be collected.
-  collectCoverageFrom: [
-    'api/**/*',
-    'lib/**/*'
+  "coverageDirectory": "./coverage",
+  "coveragePathIgnorePatterns": [
+    "coverage/",
+    "node_modules/",
+    "public/",
+    "esm/",
+    "lib/",
+    "tmp/",
+    "dist/"
   ],
-
-  // Automatically clear mock calls and instances between every test
-  clearMocks: true,
-
-  // The glob patterns Jest uses to detect test files
-  testMatch: [
-    '**/?(*.)+(test).[jt]s?(x)'
+  "coverageReporters": [
+    "lcov",
+    "json-summary",
+    "html"
   ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 75,
+      "functions": 75,
+      "lines": 75,
+      "statements": 75
+    }
+  }
 };

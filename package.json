@@ -9,14 +9,22 @@
     "got": "^10.7.0"
   },
   "devDependencies": {
-    "faker": "^4.1.0",
-    "jest": "^25.4.0"
+    "@a0/config-eslint": "^1.0.0",
+    "@a0/config-husky": "^1.0.0",
+    "@a0/config-jest": "^1.0.0",
+    "@a0/config-prettier": "^1.0.0",
+    "@a0/devtools": "^1.0.0",
+    "faker": "^4.1.0"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "jest --coverage",
-    "lint": "eslint . --fix",
-    "test:watch": "jest --verbose --watch"
+    "test": "devtools jest",
+    "lint": "devtools eslint",
+    "test:watch": "jest --verbose --watch",
+    "prepare": "devtools create-config --silent",
+    "test:coverage": "devtools jest --coverage",
+    "format": "devtools prettier",
+    "format:check": "devtools prettier --check"
   },
   "repository": {
     "type": "git",
@@ -27,5 +35,14 @@
   "bugs": {
     "url": "https://github.com/ObstacleParty/log-stream-to-slack/issues"
   },
-  "homepage": "https://github.com/ObstacleParty/log-stream-to-slack#readme"
+  "homepage": "https://github.com/ObstacleParty/log-stream-to-slack#readme",
+  "devtools": {
+    "drivers": [
+      "eslint",
+      "jest",
+      "prettier",
+      "husky"
+    ],
+    "settings": {}
+  }
 }
