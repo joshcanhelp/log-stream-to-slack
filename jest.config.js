@@ -1,8 +1,8 @@
 module.exports = {
   "testEnvironment": "node",
   "collectCoverageFrom": [
-    "**/src/**/*.{ts,tsx,js,jsx}",
-    "**/test/**/*.{ts,tsx,js,jsx}"
+    "lib/**/*.{ts,tsx,js,jsx}",
+    "api/**/*.{ts,tsx,js,jsx}"
   ],
   "coverageDirectory": "./coverage",
   "coveragePathIgnorePatterns": [
@@ -17,7 +17,8 @@ module.exports = {
   "coverageReporters": [
     "lcov",
     "json-summary",
-    "html"
+    "html",
+    "text"
   ],
   "coverageThreshold": {
     "global": {

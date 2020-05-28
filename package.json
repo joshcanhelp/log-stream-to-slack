@@ -9,22 +9,18 @@
     "got": "^10.7.0"
   },
   "devDependencies": {
-    "@a0/config-eslint": "^1.0.0",
-    "@a0/config-husky": "^1.0.0",
-    "@a0/config-jest": "^1.0.0",
-    "@a0/config-prettier": "^1.0.0",
-    "@a0/devtools": "^1.0.0",
-    "faker": "^4.1.0"
+    "eslint": "^7.1",
+    "faker": "^4.1",
+    "jest": "^25.4",
+    "prettier": "^2.0"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "devtools jest",
-    "lint": "devtools eslint",
+    "test": "jest",
+    "lint": "eslint",
     "test:watch": "jest --verbose --watch",
-    "prepare": "devtools create-config --silent",
-    "test:coverage": "devtools jest --coverage",
-    "format": "devtools prettier",
-    "format:check": "devtools prettier --check"
+    "test:coverage": "jest --coverage",
+    "format": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -35,14 +31,5 @@
   "bugs": {
     "url": "https://github.com/joshcanhelp/log-stream-to-slack/issues"
   },
-  "homepage": "https://github.com/joshcanhelp/log-stream-to-slack#readme",
-  "devtools": {
-    "drivers": [
-      "eslint",
-      "jest",
-      "prettier",
-      "husky"
-    ],
-    "settings": {}
-  }
+  "homepage": "https://github.com/joshcanhelp/log-stream-to-slack#readme"
 }
