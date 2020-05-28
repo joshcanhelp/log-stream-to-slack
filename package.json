@@ -28,14 +28,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ObstacleParty/log-stream-to-slack.git"
+    "url": "git+https://github.com/joshcanhelp/log-stream-to-slack.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ObstacleParty/log-stream-to-slack/issues"
+    "url": "https://github.com/joshcanhelp/log-stream-to-slack/issues"
   },
-  "homepage": "https://github.com/ObstacleParty/log-stream-to-slack#readme",
+  "homepage": "https://github.com/joshcanhelp/log-stream-to-slack#readme",
   "devtools": {
     "drivers": [
       "eslint",

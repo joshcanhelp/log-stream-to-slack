@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   }
 
   const failedLogs = body.filter((log) => {
-    return "f" === log.data.type[0] || /fail|limit/.test(log.data.type);
+    return "f" === log.data.type[0] || /limit/.test(log.data.type);
   });
 
   if (failedLogs.length === 0) {
@@ -26,13 +26,13 @@ module.exports = async (req, res) => {
 
   const reqUrl = process.env.SLACK_WEBHOOK_URL;
   const reqOpts = {
-    method: "POST",
     json: {
       attachments: failedLogs.map((log) => prepareSlackMsg(log)),
     },
   };
 
-  const slackResponse = await got(reqUrl, reqOpts);
+  const slackResponse = await got.post(reqUrl, reqOpts);
+
   res.status(slackResponse.statusCode);
   return res.end(slackResponse.body);
 };

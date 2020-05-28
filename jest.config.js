@@ -26,5 +26,6 @@ module.exports = {
       "lines": 75,
       "statements": 75
     }
-  }
+  },
+  "resetMocks": true
 };
